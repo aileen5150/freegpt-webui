@@ -7,5 +7,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    volumes:
+      - ./proxychains.conf:/etc/proxychains.conf
     ports:
       - "1338:1338"
