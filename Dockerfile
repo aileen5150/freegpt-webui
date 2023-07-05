@@ -12,7 +12,9 @@ COPY . .
     
 # Production stage    
 FROM python:3.10-slim-buster AS production    
-    
+RUN apt-get update && \
+    apt-get install -y proxychains-ng
+ 
 WORKDIR /app    
     
 COPY --from=build /root/.local /root/.local    
@@ -20,4 +22,4 @@ COPY . .
     
 ENV PATH=/root/.local/bin:$PATH    
     
-CMD ["python3", "./run.py"]  
+CMD ["proxychains4","python3", "./run.py"]  
